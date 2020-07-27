@@ -1,0 +1,54 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.2.5.RELEASE'
+    id "io.spring.dependency-management" version "1.0.9.RELEASE"
+    id 'com.adarshr.test-logger' version '1.6.0'
+}
+group 'com.app'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+ext {
+    springbootVersion = "2.2.5.RELEASE"
+}
+dependencies {
+    // spring
+    implementation "org.springframework.boot:spring-boot-starter-web:${springbootVersion}"
+    implementation "org.springframework.boot:spring-boot-configuration-processor:${springbootVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springbootVersion}"
+    implementation 'org.postgresql:postgresql'
+    implementation 'org.modelmapper:modelmapper:2.3.8'
+
+    runtimeOnly "org.springframework.boot:spring-boot-devtools:${springbootVersion}"
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test:${springbootVersion}"
+    testImplementation  "org.mockito:mockito-core:2.22.0"
+    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.2.0')
+}
+
+test {
+    useJUnitPlatform()
+}
+
+testlogger {
+    theme 'mocha'
+    showExceptions true
+    slowThreshold 2000
+    showSummary true
+    showPassed true
+    showSkipped true
+    showFailed true
+    showStandardStreams false
+    showPassedStandardStreams true
+    showSkippedStandardStreams true
+    showFailedStandardStreams true
+}
+
+
+

@@ -1,0 +1,19 @@
+version: '3.4'
+services:
+  postgres:
+    image: postgres:latest
+    env_file: postgres.env
+    hostname: postgres-server
+    volumes:
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 5432:5432
+  product-service:
+    image: product-service:latest
+    tty: false
+    expose:
+      - 8080
+    ports:
+      - "8080:8080"
+    links:
+      - "postgres:postgres-server"
